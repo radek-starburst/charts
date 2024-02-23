@@ -70,6 +70,9 @@ spec:
                 path: group.db
               {{- end }}
         {{- end }}
+        {{- if .Values.coordinator.extraVolumes }}
+        {{- tpl (toYaml .Values.coordinator.extraVolumes) . | nindent 8 }}
+        {{- end }}
         {{- range .Values.secretMounts }}
         - name: {{ .name }}
           secret:
@@ -116,6 +119,9 @@ spec:
             {{- if eq .Values.server.config.authenticationType "PASSWORD" }}
             - mountPath: {{ .Values.server.config.path }}/auth
               name: password-volume
+            {{- end }}
+            {{- if .Values.coordinator.extraVolumeMounts }}
+            {{- tpl (toYaml .Values.coordinator.extraVolumeMounts) . | nindent 12 }}
             {{- end }}
           ports:
             - name: http

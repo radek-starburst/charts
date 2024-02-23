@@ -6,8 +6,7 @@ image:
   repository: trinodb/trino
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart version.
-  # Same value as Chart.yaml#appVersion
-  tag: 423
+  tag: latest
 
 imagePullSecrets:
   - name: registry-credentials
@@ -221,6 +220,10 @@ coordinator:
 
   affinity: {}
 
+  extraVolumeMounts: []
+
+  extraVolumes: []
+
   additionalConfigFiles: {}
 
   annotations: {}
@@ -291,6 +294,10 @@ worker:
     # - name: sample-secret
     #   secretName: sample-secret
     #   path: /secrets/sample.json
+
+  extraVolumeMounts: []
+
+  extraVolumes: []
 
 kafka:
   mountPath: "/etc/trino/schemas"
